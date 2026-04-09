@@ -266,8 +266,35 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
     }
   };
 
-  // Função auxiliar para upload seguro
+  // Função auxiliar para upload (Prioridade ImgBB -> Fallback Supabase)
   const uploadFileToStorage = async (file: File): Promise<string> => {
+    const imgbbAPIKey = import.meta.env.VITE_IMGBB_API_KEY;
+
+    // Se existir chave do ImgBB configurada, upar pra lá (Iluminado / Não consome espaço Supabase)
+    if (imgbbAPIKey) {
+      try {
+        const formData = new FormData();
+        formData.append('image', file);
+
+        const response = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbAPIKey}`, {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await response.json();
+        
+        if (data.success) {
+          return data.data.url;
+        } else {
+          console.error("Erro na API do ImgBB:", data.error?.message);
+          throw new Error(data.error?.message || "Falha desconhecida no ImgBB");
+        }
+      } catch (err) {
+        console.warn("Falha ao subir para ImgBB, tentando fallback Supabase...", err);
+      }
+    }
+
+    // FALLBACK: Se não tiver a key do ImgBB ou der erro, manda pro Supabase
     const fileExt = file.name.split('.').pop();
     const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
     const filePath = `${fileName}`;
@@ -774,7 +801,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
                 onClick={async () => {
                   try {
                     await onSaveSettings({
-                      whatsappNumbers: numbers.filter(n => n.trim() !== ''),
+                      whatsappNumbers: numbers, // Removido o filtro genérico para respeitar a ordem vazia do usuário
                       googleMapsUrl: mapsUrl,
                       backgroundImageUrl: backgroundImageUrl,
                       backgroundPosition: backgroundPos,
