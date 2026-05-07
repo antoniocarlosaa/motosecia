@@ -216,16 +216,6 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
     return val ? parseInt(val).toLocaleString('pt-BR') : '';
   };
 
-  // Mantemos fileToBase64 apenas para o Background Image das configurações
-  const fileToBase64 = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = error => reject(error);
-    });
-  };
-
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, type: 'image' | 'video') => {
     const files = Array.from(e.target.files || []) as File[];
     if (files.length === 0) return;
@@ -573,10 +563,10 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
                           const file = e.target.files?.[0];
                           if (file) {
                             try {
-                              const base64 = await fileToBase64(file);
-                              setBackgroundImageUrl(base64);
+                              const url = await uploadFileToStorage(file);
+                              setBackgroundImageUrl(url);
                             } catch (err) {
-                              alert("Erro ao processar imagem");
+                              alert("Erro ao processar imagem para o background: " + err);
                             }
                           }
                         }}
