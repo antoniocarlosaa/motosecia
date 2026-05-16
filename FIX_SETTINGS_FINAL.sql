@@ -1,4 +1,4 @@
--- 🚨 SCRIPT DE CORREÇÃO FINAL - SETTINGS (Execute no SQL Editor do Supabase) 🚨
+-- 🚨 SCRIPT DE CORREÇÀO FINAL - SETTINGS (Execute no SQL Editor do Supabase) 🚨
 
 -- 1. Cria a tabela settings se não existir
 CREATE TABLE IF NOT EXISTS settings (

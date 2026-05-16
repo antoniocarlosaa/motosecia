@@ -2,7 +2,7 @@
 -- O erro persiste porque seu celular provavelmente não está conseguindo confirmar que é "Você" (Erro de Autenticação/Sessão).
 -- Este script libera o cadastro para TODOS (mesmo sem login) temporariamente para confirmarmos issso.
 
--- 1. Remover políticas anteriores de INSERÇÃO e ATUALIZAÇÃO
+-- 1. Remover políticas anteriores de INSERÇÀO e ATUALIZAÇÀO
 DROP POLICY IF EXISTS "Super Insert Policy" ON vehicles;
 DROP POLICY IF EXISTS "Super Update Policy" ON vehicles;
 DROP POLICY IF EXISTS "Enable insert for authenticated users only" ON vehicles;

@@ -9,8 +9,8 @@ async function testSupabaseConnection() {
     const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
     console.log('📋 Credenciais configuradas:');
-    console.log('URL:', url || '❌ NÃO CONFIGURADA');
-    console.log('Key:', key ? (key.startsWith('eyJ') ? '✅ Formato correto' : '⚠️ Formato suspeito') : '❌ NÃO CONFIGURADA');
+    console.log('URL:', url || '❌ NÀO CONFIGURADA');
+    console.log('Key:', key ? (key.startsWith('eyJ') ? '✅ Formato correto' : '⚠️ Formato suspeito') : '❌ NÀO CONFIGURADA');
     console.log('');
 
     if (!url || !key) {

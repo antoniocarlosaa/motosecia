@@ -1,4 +1,4 @@
--- ☢️ SCRIPT NUCLEAR (SOLUÇÃO FINAL) ☢️
+-- ☢️ SCRIPT NUCLEAR (SOLUÇÀO FINAL) ☢️
 -- Esse script remove TODAS as travas de segurança possíveis.
 
 -- 1. DESATIVA TOTALMENTE A SEGURANÇA DO BANCO DE DADOS

@@ -1,4 +1,4 @@
--- 🚨 SCRIPT DE CORREÇÃO FINAL - RLS (Execute no SQL Editor do Supabase) 🚨
+-- 🚨 SCRIPT DE CORREÇÀO FINAL - RLS (Execute no SQL Editor do Supabase) 🚨
 
 -- 1. Resetar Segurança da Tabela
 ALTER TABLE vehicles DISABLE ROW LEVEL SECURITY;
@@ -21,14 +21,14 @@ ON vehicles FOR INSERT
 TO authenticated
 WITH CHECK (true);
 
--- 4. CRIAR REGRA DE ATUALIZAÇÃO
+-- 4. CRIAR REGRA DE ATUALIZAÇÀO
 CREATE POLICY "Super Update Policy"
 ON vehicles FOR UPDATE
 TO authenticated
 USING (true)
 WITH CHECK (true);
 
--- 5. CRIAR REGRA DE EXCLUSÃO
+-- 5. CRIAR REGRA DE EXCLUSÀO
 CREATE POLICY "Super Delete Policy"
 ON vehicles FOR DELETE
 TO authenticated

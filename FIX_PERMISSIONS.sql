@@ -1,4 +1,4 @@
--- CORREÇÃO DE PERMISSÕES (RLS)
+-- CORREÇÀO DE PERMISSÕES (RLS)
 -- Execute este script no SQL Editor do Supabase para corrigir o erro "new row violates row-level security policy"
 
 -- 1. Garante que RLS está ativo (Segurança)
@@ -12,14 +12,14 @@ DROP POLICY IF EXISTS "Apenas usuários autenticados podem atualizar veículos" 
 DROP POLICY IF EXISTS "Veículos são públicos" ON vehicles;
 DROP POLICY IF EXISTS "Enable read for everyone" ON vehicles;
 
--- 3. Cria Política de INSERÇÃO (Authenticated Users Only)
+-- 3. Cria Política de INSERÇÀO (Authenticated Users Only)
 -- Permite que qualquer usuário logado cadastre veículos
 CREATE POLICY "Enable insert for authenticated users only"
 ON vehicles FOR INSERT
 TO authenticated
 WITH CHECK (true);
 
--- 4. Cria Política de ATUALIZAÇÃO (Authenticated Users Only)
+-- 4. Cria Política de ATUALIZAÇÀO (Authenticated Users Only)
 -- Permite que qualquer usuário logado edite veículos
 CREATE POLICY "Enable update for authenticated users only"
 ON vehicles FOR UPDATE
@@ -34,7 +34,7 @@ ON vehicles FOR SELECT
 TO public
 USING (true);
 
--- 6. Cria Política de EXCLUSÃO (Authenticated Users Only)
+-- 6. Cria Política de EXCLUSÀO (Authenticated Users Only)
 CREATE POLICY "Enable delete for authenticated users only"
 ON vehicles FOR DELETE
 TO authenticated

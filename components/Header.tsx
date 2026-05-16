@@ -27,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({ filter, setFilter, onAdminClick, onNews
             {/* TOP TITLE BAR */}
             <div className="w-full text-center py-2 border-b border-white/10 bg-black/40 backdrop-blur-md">
                 <h2 className="text-sm md:text-lg font-heading text-white font-bold tracking-widest uppercase drop-shadow-md">
-                    Encontre seu <span className="text-gold">Veículo dos Sonhos</span>
+                    Sua próxima moto está na MOTOS <span className="font-sans">&amp;</span> <span className="text-[#00A36C]">CIA</span>
                 </h2>
             </div>
 
@@ -49,7 +49,7 @@ const Header: React.FC<HeaderProps> = ({ filter, setFilter, onAdminClick, onNews
 
                     {/* LOGO */}
                     <h1 className="text-2xl font-bold italic tracking-tighter text-white cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-                        MOTOS &amp; <span className="text-gold">CIA</span>
+                        MOTOS <span className="font-sans">&amp;</span> <span className="text-[#00A36C]">CIA</span>
                     </h1>
                 </div>
 

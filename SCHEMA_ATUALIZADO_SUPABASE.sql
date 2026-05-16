@@ -1,5 +1,5 @@
 -- ==========================================
--- SCRIPT DE CONFIGURAÇÃO COMPLETA - MOTOS & CIA
+-- SCRIPT DE CONFIGURAÇÀO COMPLETA - MOTOS & CIA
 -- Execute este script no "SQL Editor" do Supabase
 -- ==========================================
 

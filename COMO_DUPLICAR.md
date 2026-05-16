@@ -1,6 +1,6 @@
 # Como Duplicar e Adaptar o Projeto para Outra Loja
 
-Este guia explica como pegar o código atual do "Rei das Motos" e transformá-lo em um catálogo novo para outra loja (ex: "Império dos Carros").
+Este guia explica como pegar o código atual do "Motos & Cia" e transformá-lo em um catálogo novo para outra loja (ex: "Império dos Carros").
 
 ## 1. Copiar o Projeto no Computador
 1.  Vá até a pasta onde o projeto está salvo.
@@ -33,7 +33,7 @@ Aqui é onde você deixa a loja com a cara nova.
 
 ### Alterar Nome e Logo
 - **Arquivo**: `components/Header.tsx`
-- **O que mudar**: Procure por "REI DAS MOTOS" e mude para o nome da nova loja.
+- **O que mudar**: Procure por "MOTOS & CIA" e mude para o nome da nova loja.
 
 ### Alterar Cores (Tema)
 O projeto usa cores definidas (principalmente o Dourado/Gold e Preto).

@@ -1,4 +1,4 @@
-# Configuração do Supabase - Rei das Motos
+# Configuração do Supabase - Motos & Cia
 
 ## Passo 1: Criar Projeto no Supabase
 

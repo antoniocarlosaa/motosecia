@@ -1,4 +1,4 @@
-# Guia de Deploy na Vercel - Rei das Motos Luxury Catalog
+# Guia de Deploy na Vercel - Motos & Cia Luxury Catalog
 
 Este guia passo a passo ajudará você a colocar seu catálogo online usando a Vercel.
 

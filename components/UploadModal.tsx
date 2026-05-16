@@ -183,7 +183,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ onClose, onUpload }) => {
           </div>
 
           <button type="submit" disabled={isProcessing} className="w-full py-6 bg-gold text-black text-[13px] font-heading tracking-[0.35em] rounded-full shadow-lg hover:bg-gold-light transition-all disabled:opacity-50">
-            {isProcessing ? 'ENVIANDO MÍDIA...' : 'CONFIRMAR PUBLICAÇÃO'}
+            {isProcessing ? 'ENVIANDO MÍDIA...' : 'CONFIRMAR PUBLICAÇÀO'}
           </button>
         </form>
       </div>
