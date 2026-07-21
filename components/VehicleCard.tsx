@@ -1,5 +1,6 @@
-﻿import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Vehicle, VehicleType } from '../types';
+import ShareButton from './ShareButton';
 
 interface VehicleCardProps {
   vehicle: Vehicle;
@@ -145,6 +146,13 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle, onInterest, onClick,
              </div>
           ))}
         </div>
+
+        <ShareButton
+          vehicleId={vehicle.id}
+          vehicleName={vehicle.name}
+          variant="floating"
+          className="absolute top-3 right-3 z-30"
+        />
 
       </div>
 

@@ -1,5 +1,6 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Vehicle } from '../types';
+import ShareButton from './ShareButton';
 import ImageLightbox from './ImageLightbox';
 
 interface VehicleDetailModalProps {
@@ -197,6 +198,12 @@ const VehicleDetailModal: React.FC<VehicleDetailModalProps> = ({ vehicle, onClos
                                 </button>
                             </>
                         )}
+
+                        <ShareButton
+                            vehicleId={vehicle.id}
+                            vehicleName={vehicle.name}
+                            variant="full"
+                        />
                     </div>
                 </div>
             </div>
