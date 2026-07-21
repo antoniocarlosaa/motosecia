@@ -25,13 +25,14 @@ const shareButtonSrc = path.join(scriptDir, 'ShareButton.tsx');
 const shareButtonDest = path.join(componentsDir, 'ShareButton.tsx');
 const vehicleCardPath = path.join(componentsDir, 'VehicleCard.tsx');
 const vehicleDetailModalPath = path.join(componentsDir, 'VehicleDetailModal.tsx');
+const adminPanelPath = path.join(componentsDir, 'AdminPanel.tsx');
 const appPath = path.join(projectRoot, 'App.tsx');
 
 // Helper to check if file exists
 const exists = (filePath) => fs.existsSync(filePath);
 
 // Step 1: Copy ShareButton.tsx component
-console.log(`${colors.bright}${colors.blue}[1/4] Copiando componente ShareButton.tsx...${colors.reset}`);
+console.log(`${colors.bright}${colors.blue}[1/5] Copiando componente ShareButton.tsx...${colors.reset}`);
 try {
   if (!exists(componentsDir)) {
     fs.mkdirSync(componentsDir, { recursive: true });
@@ -50,7 +51,7 @@ try {
 }
 
 // Step 2: Modify VehicleCard.tsx
-console.log(`\n${colors.bright}${colors.blue}[2/4] Atualizando VehicleCard.tsx...${colors.reset}`);
+console.log(`\n${colors.bright}${colors.blue}[2/5] Atualizando VehicleCard.tsx...${colors.reset}`);
 if (!exists(vehicleCardPath)) {
   console.log(`   ⚠️  Arquivo ${vehicleCardPath} não encontrado neste projeto. Pulando...`);
 } else {
@@ -87,9 +88,6 @@ if (!exists(vehicleCardPath)) {
 
     // Add button markup if not present
     if (!content.includes('vehicleId={vehicle.id}') || !content.includes('variant="floating"')) {
-      // Find the closing div of the media container
-      // Anchor 1: End of dynamicBadges block
-      const badgeAnchor = 'dynamicBadges.map';
       const defaultInfoAnchor = 'INFO CONTENT FOR DEFAULT VARIANT';
       const isFeaturedAnchor = '!isFeatured && (';
 
@@ -145,7 +143,7 @@ if (!exists(vehicleCardPath)) {
 }
 
 // Step 3: Modify VehicleDetailModal.tsx
-console.log(`\n${colors.bright}${colors.blue}[3/4] Atualizando VehicleDetailModal.tsx...${colors.reset}`);
+console.log(`\n${colors.bright}${colors.blue}[3/5] Atualizando VehicleDetailModal.tsx...${colors.reset}`);
 if (!exists(vehicleDetailModalPath)) {
   console.log(`   ⚠️  Arquivo ${vehicleDetailModalPath} não encontrado neste projeto. Pulando...`);
 } else {
@@ -180,8 +178,6 @@ if (!exists(vehicleDetailModalPath)) {
         const parts = content.split(actionContainerAnchor);
         const afterContainerStart = parts[1];
         
-        // Find the first closing </div> for this container
-        // Since we have nested elements, we look for the pattern ")}\n                    </div>"
         const closingPattern = ')}\n                    </div>';
         const closingPatternCRLF = ')}\r\n                    </div>';
         
@@ -212,8 +208,66 @@ if (!exists(vehicleDetailModalPath)) {
   }
 }
 
-// Step 4: Verify App.tsx Deep Linking
-console.log(`\n${colors.bright}${colors.blue}[4/4] Verificando suporte a Deep Linking em App.tsx...${colors.reset}`);
+// Step 4: Modify AdminPanel.tsx
+console.log(`\n${colors.bright}${colors.blue}[4/5] Atualizando AdminPanel.tsx (Dashboard)...${colors.reset}`);
+if (!exists(adminPanelPath)) {
+  console.log(`   ⚠️  Arquivo ${adminPanelPath} não encontrado neste projeto. Pulando...`);
+} else {
+  try {
+    let content = fs.readFileSync(adminPanelPath, 'utf8');
+
+    // Add button markup if not present
+    if (!content.includes('title="Compartilhar / Copiar Link"')) {
+      const activeListAnchor = 'className="w-8 h-8 flex items-center justify-center bg-white/5 rounded-full text-blue-400 hover:bg-blue-400/20 transition-all" title="Editar Completo"';
+      const soldListAnchor = 'className="w-8 h-8 flex items-center justify-center rounded-full bg-green-500/20 text-green-500 transition-all" title="Marcar como Disponível"';
+
+      let activeSuccess = false;
+      let soldSuccess = false;
+
+      const shareButtonCode = `\n                          <button onClick={(e) => {
+                            e.stopPropagation();
+                            const shareUrl = \`\${window.location.origin}?v=\${v.id}\`;
+                            if (navigator.share) {
+                              navigator.share({
+                                title: v.name,
+                                text: \`Confira este veículo: \${v.name}\`,
+                                url: shareUrl
+                              }).catch(err => console.log(err));
+                            } else {
+                              navigator.clipboard.writeText(shareUrl)
+                                .then(() => alert('Link copiado!'))
+                                .catch(err => console.error(err));
+                            }
+                          }} className="w-8 h-8 flex items-center justify-center bg-white/5 rounded-full text-gold hover:bg-gold/20 transition-all" title="Compartilhar / Copiar Link">
+                            <span className="material-symbols-outlined text-[18px]">share</span>
+                          </button>`;
+
+      if (content.includes(activeListAnchor)) {
+        content = content.replace(activeListAnchor, `${activeListAnchor}${shareButtonCode}`);
+        activeSuccess = true;
+      }
+      
+      if (content.includes(soldListAnchor)) {
+        content = content.replace(soldListAnchor, `${soldListAnchor}${shareButtonCode}`);
+        soldSuccess = true;
+      }
+
+      if (activeSuccess || soldSuccess) {
+        fs.writeFileSync(adminPanelPath, content, 'utf8');
+        console.log(`   ✅ Botão de Compartilhar integrado ao Painel Administrativo.`);
+      } else {
+        console.log(`   ❌ Não foi possível encontrar os locais de inserção automática em AdminPanel.tsx.`);
+      }
+    } else {
+      console.log(`   ℹ️  O botão de compartilhar já está integrado no AdminPanel.`);
+    }
+  } catch (err) {
+    console.error(`   ❌ Erro ao modificar AdminPanel.tsx: ${err.message}`);
+  }
+}
+
+// Step 5: Verify App.tsx Deep Linking
+console.log(`\n${colors.bright}${colors.blue}[5/5] Verificando suporte a Deep Linking em App.tsx...${colors.reset}`);
 if (!exists(appPath)) {
   console.log(`   ⚠️  Arquivo ${appPath} não encontrado neste projeto. Pulando...`);
 } else {

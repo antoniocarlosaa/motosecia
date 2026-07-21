@@ -1130,6 +1130,23 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
                           <button onClick={() => openFullEdit(v)} className="w-8 h-8 flex items-center justify-center bg-white/5 rounded-full text-blue-400 hover:bg-blue-400/20 transition-all" title="Editar Completo">
                             <span className="material-symbols-outlined text-[18px]">edit</span>
                           </button>
+                          <button onClick={(e) => {
+                            e.stopPropagation();
+                            const shareUrl = `${window.location.origin}?v=${v.id}`;
+                            if (navigator.share) {
+                              navigator.share({
+                                title: v.name,
+                                text: `Confira este veículo: ${v.name}`,
+                                url: shareUrl
+                              }).catch(err => console.log(err));
+                            } else {
+                              navigator.clipboard.writeText(shareUrl)
+                                .then(() => alert('Link copiado!'))
+                                .catch(err => console.error(err));
+                            }
+                          }} className="w-8 h-8 flex items-center justify-center bg-white/5 rounded-full text-gold hover:bg-gold/20 transition-all" title="Compartilhar / Copiar Link">
+                            <span className="material-symbols-outlined text-[18px]">share</span>
+                          </button>
                           <button onClick={() => {
                             onUpdateVehicle(v.id, { isFeatured: !v.isFeatured });
                             if (user?.email) logger.logAction(user.email, 'EDITAR', v.name, v.isFeatured ? 'Removeu Destaque' : 'Destacou');
@@ -1175,6 +1192,23 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
                     <div className="flex flex-col items-center gap-2 pt-1 shrink-0">
                       <button onClick={() => setConfirmSoldId(v.id)} className="w-8 h-8 flex items-center justify-center rounded-full bg-green-500/20 text-green-500 transition-all" title="Marcar como Disponível">
                         <span className="material-symbols-outlined text-[18px]">undo</span>
+                      </button>
+                      <button onClick={(e) => {
+                        e.stopPropagation();
+                        const shareUrl = `${window.location.origin}?v=${v.id}`;
+                        if (navigator.share) {
+                          navigator.share({
+                            title: v.name,
+                            text: `Confira este veículo: ${v.name}`,
+                            url: shareUrl
+                          }).catch(err => console.log(err));
+                        } else {
+                          navigator.clipboard.writeText(shareUrl)
+                            .then(() => alert('Link copiado!'))
+                            .catch(err => console.error(err));
+                        }
+                      }} className="w-8 h-8 flex items-center justify-center bg-white/5 rounded-full text-gold hover:bg-gold/20 transition-all" title="Compartilhar / Copiar Link">
+                        <span className="material-symbols-outlined text-[18px]">share</span>
                       </button>
                       <button onClick={() => onDeleteVehicle(v.id)} className="w-8 h-8 flex items-center justify-center bg-white/5 rounded-full text-red-500 hover:bg-red-500/20 transition-all" title="Excluir do Histórico">
                         <span className="material-symbols-outlined text-[18px]">delete</span>

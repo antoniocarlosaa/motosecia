@@ -51,8 +51,9 @@ const ShareButton: React.FC<ShareButtonProps> = ({
   };
 
   if (variant === 'floating') {
+    const positionClass = className.includes('absolute') || className.includes('fixed') ? '' : 'relative';
     return (
-      <div className={`relative ${className}`}>
+      <div className={`${positionClass} ${className}`}>
         <button
           onClick={handleShare}
           className="w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-gold flex items-center justify-center hover:bg-gold hover:text-black active:scale-95 transition-all shadow-md cursor-pointer"
